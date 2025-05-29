@@ -77,18 +77,19 @@ class Database {
         await this.writeFile()
     }
     async delete(table:tablesAvailable, params:ParamsProps){
-        if(!params.id) return null
+        if(!params?.id) return null
         const tableExist = this.checkTableExist(table)
         if(!tableExist) return null
         const tableIndex = this.database[table].findIndex(row => row.id === params.id)
         if(tableIndex === -1) return null
         this.database[table].splice(tableIndex,1)
+        await this.writeFile()
     }
 
     async update<T>(props: updateProps<T>):Promise<T | null>{
         
         const {data,params,table} = props
-        if(!params.id) return null
+        if(!params?.id) return null
         const tableExist = this.checkTableExist(table)
         if(!tableExist) return null
         const tableIndex = this.database[table].findIndex(row => row.id === params.id)
@@ -99,7 +100,7 @@ class Database {
             ...data,
         }
         this.database[table][tableIndex] = contentUpdated
-
+        await this.writeFile()
         return contentUpdated
 
         

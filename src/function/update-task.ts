@@ -7,7 +7,7 @@ export async function updateTask(request:IncomingMessage, response:ServerRespons
     const content = await database.update({
         data: body,
         params: request.params,
-        table: "users"
+        table: "tasks"
     })
     response.writeHead(200).end(JSON.stringify(content))
 }

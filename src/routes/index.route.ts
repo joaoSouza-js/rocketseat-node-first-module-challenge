@@ -1,4 +1,4 @@
-import { IncomingMessage, ServerResponse } from "http"
+import { IncomingMessage, ServerResponse } from "node:http";
 import { getTasks } from "../function/get-task"
 import { createTask } from "../function/create-task"
 import { updateTask } from "../function/update-task"
@@ -28,14 +28,19 @@ export const routes: routeProps[] = [
         handler: updateTask 
     },
     {
+        method: "PUT",
+        path: "/tasks/:id",
+        handler: updateTask 
+    },
+    {
+        method: "PATCH",
+        path: "/tasks/:id/complete",
+        handler: markTaskCompleted,
+    },
+    {
         method: "DELETE",
         path: "/tasks/:id",
         handler: deleteTask
     },
-    {
-        method: "PATCH",
-        path: "/tasks/:id",
-        handler: markTaskCompleted
-    }
 
 ]
