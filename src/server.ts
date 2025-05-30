@@ -2,11 +2,13 @@ import { createServer } from "node:http";
 import { jsonMiddleware } from "./middleware/json";
 import { routes } from "./routes/index.route";
 import { getRouteRegex } from "./utils/route-regex";
+import { multipartMiddleware } from "./middleware/multipart";
 
 const server = createServer(async (request, response) => {
     const { method } = request;
     const url = request.url as string;
     await jsonMiddleware(request);
+   
     const route = routes.find((route) => {
         const regex = getRouteRegex(route.path).test(url as string);
         return regex && route.method === method;
