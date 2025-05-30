@@ -20,9 +20,8 @@ export async function csvUploads(request:IncomingMessage, response:ServerRespons
         });
 
         taskArray.push(tasks)
-        console.log(taskArray.length)
  
-        if(taskArray.length > 50){
+        if(taskArray.length > 30){
           const  taskArrayToSave = taskArray.flatMap((task) => task)
           await database.insertMany("tasks",taskArrayToSave)
         

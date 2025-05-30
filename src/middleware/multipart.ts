@@ -23,7 +23,6 @@ export async function multipartMiddleware(
         });
 
         taskArray.push(tasks)
-        console.log(taskArray.length)
  
         if(taskArray.length > 50){
           const  taskArrayToSave = taskArray.flatMap((task) => task)

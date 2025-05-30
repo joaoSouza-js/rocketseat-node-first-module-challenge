@@ -87,7 +87,6 @@ class Database {
 
     async insertMany<T>(table: tablesAvailable, data: T[]) {
         const tableExist = this.checkTableExist(table);
-        console.log(data[0]);
         if (tableExist) {
             this.database[table].push(...data);
         } else {
